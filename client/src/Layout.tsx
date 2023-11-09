@@ -11,10 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <Flex flexDir={"column"}>
         <Navbar />
-        <Flex>
-          <SideBar />
-          <Box as="main">{children}</Box>
-        </Flex>
+        <Box as="main">{children}</Box>
       </Flex>
     </>
   );
