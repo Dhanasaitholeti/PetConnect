@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import HomeScreen from "../pages/HomeScreen";
-import FavouriteScreen from "../pages/FavouriteScreen";
-import NotFoundScreen from "../pages/NotFoundScreen";
+import HomeScreen from "../../pages/HomeScreen";
+import FavouriteScreen from "../../pages/FavouriteScreen";
+import NotFoundScreen from "../../pages/NotFoundScreen";
 // import RouteGaurd from "./Routegaurd";
 
 const RouteManager = () => {

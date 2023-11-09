@@ -1,7 +1,7 @@
 import { Flex, HStack, Image } from "@chakra-ui/react";
 import { BsFillHeartFill, BsFillChatRightTextFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/NavLogo.png";
+import logo from "../../assets/images/NavLogo.png";
 
 const Navbar = () => {
   return (
@@ -10,11 +10,11 @@ const Navbar = () => {
         as={"nav"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        // py={3}
         px={32}
-        shadow={"lg"}
       >
-        <Image src={logo} h={20} />
+        <Link to={"/"}>
+          <Image src={logo} h={20} />
+        </Link>
 
         <HStack gap={10}>
           <Link to={"/favourite"}>

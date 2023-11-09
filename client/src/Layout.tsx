@@ -1,6 +1,6 @@
 import { Box, Flex } from "@chakra-ui/react";
-import Navbar from "./components/Navbar";
-import SideBar from "./components/SideBar";
+import Navbar from "./components/shared/Navbar";
+import SideBar from "./components/shared/SideBar";
 
 interface LayoutProps {
   children: React.ReactNode;

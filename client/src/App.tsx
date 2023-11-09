@@ -1,5 +1,5 @@
 import Layout from "./Layout";
-import RouteManager from "./Routes/RouteManager";
+import RouteManager from "./components/Routes/RouteManager";
 
 function App() {
   return (
