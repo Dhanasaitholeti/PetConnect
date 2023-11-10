@@ -37,9 +37,9 @@ export const userLogin = async (req: Request, res: Response) => {
 };
 
 export const userSignup = async (req: Request, res: Response) => {
-  const { email, name, Password, role } = req.body;
+  const { email, name, Password } = req.body;
   try {
-    const EmailUsersData = await getUserDataWithEmail(Email);
+    const EmailUsersData = await getUserDataWithEmail(email);
     if (EmailUsersData)
       return res.send(400).json({
         message: "Email is already in use, Try with a different email",
@@ -53,9 +53,9 @@ export const userSignup = async (req: Request, res: Response) => {
         name,
         email,
         password_hash,
-        role,
       },
     });
+
     res.status(201).json({ message: "Created New User", Data: NewUser });
   } catch (error) {
     console.log(error);

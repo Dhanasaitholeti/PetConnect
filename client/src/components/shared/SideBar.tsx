@@ -1,10 +1,10 @@
-import { Flex, Heading, List, ListItem, Text } from "@chakra-ui/react";
+import { Button, Flex, Heading, List, ListItem, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import queryString from "query-string";
 
 import filterHelper from "../../utils/helpers/filterHelper";
 import { filtersType } from "../../utils/types";
-import { useNavigate } from "react-router-dom";
 
 const categories = ["Cats", "Dogs", "Rabbits", "Squirrels", "Others"];
 const prices = ["high-to-low", "low-to-high"];
@@ -19,8 +19,7 @@ const SideBar = () => {
   useEffect(() => {
     const filters = filterHelper({ ...filter });
     const stringifiedParams = queryString.stringify(filters);
-    console.log(stringifiedParams);
-    if (stringifiedParams != "") navigate(`/?${stringifiedParams}`);
+    navigate(`/?${stringifiedParams}`);
   }, [filter]);
 
   return (
@@ -50,7 +49,7 @@ const SideBar = () => {
         <List spacing={2} ml={4}>
           {prices.map((price) => (
             <ListItem
-              onClick={() => setFilter({ ...filter, price })}
+              onClick={() => setFilter((prev) => ({ ...prev, price }))}
               fontWeight={"semibold"}
               key={price}
               _hover={{ cursor: "pointer", color: "blue.500" }}
@@ -60,6 +59,19 @@ const SideBar = () => {
           ))}
         </List>
       </Flex>
+
+      <Button
+        onClick={() =>
+          setFilter((prev) => ({
+            ...prev,
+            category: undefined,
+            price: undefined,
+          }))
+        }
+        colorScheme="blue"
+      >
+        clear filters
+      </Button>
     </Flex>
   );
 };

@@ -10,45 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ROLE {
-  BUYER
-  SELLER
-}
-
 model user {
-  id String @id @default(uuid())
-  name String
-  email String
+  id            String    @id @default(uuid())
+  name          String
+  email         String
   password_hash String
-  role ROLE
-  pets pet[]
-  chats chat[]
-  messages message[]
+  pets          pet[]
+  chats         chat[]
+  messages      message[]
 }
 
 model pet {
-  id String @id @default(uuid())
-  category String
-  breed String
+  id          String @id @default(uuid())
+  category    String
+  breed       String
   description String
-  image_url String
-  price Float
-  seller  user @relation(fields: [userid],references: [id])
-  userid  String
+  image_url   String
+  price       Float
+  seller      user   @relation(fields: [userid], references: [id])
+  userid      String
 }
 
 model chat {
-  id String @id @default(uuid())
+  id       String    @id @default(uuid())
   members  user[]
   messages message[]
 }
 
 model message {
-  id       String @id @default(uuid())
+  id       String   @id @default(uuid())
   content  String
-  sender   user   @relation(fields: [senderId], references: [id])
+  sender   user     @relation(fields: [senderId], references: [id])
   senderId String
-  chat chat   @relation(fields: [chatId], references: [id])
+  chat     chat     @relation(fields: [chatId], references: [id])
   chatId   String
   sentTime DateTime @default(now())
 }

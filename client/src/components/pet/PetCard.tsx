@@ -19,7 +19,7 @@ const PetCard: React.FC<PetProps> = ({ Pet }) => {
         <Card _hover={{ boxShadow: "xl" }} maxW={"450px"}>
           <Image
             src={Pet.img_url}
-            fallbackSrc=""
+            fallbackSrc="https://placehold.jp/3d4070/ffffff/150x150.png?text=rendering"
             alt={Pet.breed}
             height="200px"
             objectFit="cover"
