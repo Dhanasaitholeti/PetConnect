@@ -18,6 +18,7 @@ enum ROLE {
 model user {
   id String @id @default(uuid())
   name String
+  email String
   password_hash String
   role ROLE
   pets pet[]

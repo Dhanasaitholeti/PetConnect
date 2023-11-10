@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 export const getPets = (Req: Request, res: Response) => {
   res.json(200).json({ message: "it is from getPets" });
