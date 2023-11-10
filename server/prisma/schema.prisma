@@ -21,6 +21,8 @@ model user {
   password_hash String
   role ROLE
   pets pet[]
+  chats chat[]
+  messages message[]
 }
 
 model pet {
@@ -30,7 +32,22 @@ model pet {
   description String
   image_url String
   price Float
-  seller  user @relation(references: [id],fields: [userid])
+  seller  user @relation(fields: [userid],references: [id])
   userid  String
 }
 
+model chat {
+  id String @id @default(uuid())
+  members  user[]
+  messages message[]
+}
+
+model message {
+  id       String @id @default(uuid())
+  content  String
+  sender   user   @relation(fields: [senderId], references: [id])
+  senderId String
+  chat chat   @relation(fields: [chatId], references: [id])
+  chatId   String
+  sentTime DateTime @default(now())
+}

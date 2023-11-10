@@ -16,9 +16,10 @@ const PetCard: React.FC<PetProps> = ({ Pet }) => {
   return (
     <>
       <Link to={`/pet/${Pet.id}`}>
-        <Card _hover={{ boxShadow: "xl" }}>
+        <Card _hover={{ boxShadow: "xl" }} maxW={"450px"}>
           <Image
             src={Pet.img_url}
+            fallbackSrc=""
             alt={Pet.breed}
             height="200px"
             objectFit="cover"

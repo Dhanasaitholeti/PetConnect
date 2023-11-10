@@ -1,6 +1,5 @@
 import { Box, Flex } from "@chakra-ui/react";
 import Navbar from "./components/shared/Navbar";
-import SideBar from "./components/shared/SideBar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,7 +10,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <Flex flexDir={"column"}>
         <Navbar />
-        <Box as="main">{children}</Box>
+        <Box as="main" mt={10}>
+          {children}
+        </Box>
       </Flex>
     </>
   );
