@@ -1,19 +1,31 @@
 import dotenv from "dotenv";
 dotenv.config(); //for accesing environment variables
+import http from "http";
 import express from "express";
+import { Server } from "socket.io";
 import cors from "cors";
 import bodyParser from "body-parser";
-import MainRouter from "./router";
+
+import MainRouter from "./router"; //for handleing the routes
+import socketServer from "socket"; // for websocket connections
 
 const port = process.env.PORT || 8080;
 
-const server = express();
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
-server.use(cors());
-server.use(bodyParser.json());
+MainRouter(app);
 
-MainRouter(server);
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: "*",
+  },
+});
 
-server.listen(port, () => {
+socketServer(io);
+
+httpServer.listen(port, () => {
   console.log(`server is listening on http://localhost:${port}`);
 });

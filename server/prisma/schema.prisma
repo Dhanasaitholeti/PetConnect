@@ -33,3 +33,4 @@ model pet {
   seller  user @relation(references: [id],fields: [userid])
   userid  String
 }
+
