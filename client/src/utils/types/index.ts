@@ -9,11 +9,7 @@ export interface LoginFormData {
 }
 
 export interface LoginResponseData {
-  res: {
-    data: {
-      token: string;
-    };
-  };
+  token: string;
 }
 
 export interface singupFormData {
@@ -22,10 +18,24 @@ export interface singupFormData {
   password: string;
 }
 
-export interface signupResponseData {
-  res: {
-    data: {
-      message: string;
-    };
-  };
+export interface commonCreationResponseData {
+  message: string;
 }
+
+export interface addPetState {
+  category: string;
+  breed: string;
+  imageUrl: string;
+  description: string;
+  price: number;
+}
+
+export type addPetAction =
+  | { type: "SET_CATEGORY"; payload: string }
+  | { type: "SET_BREED"; payload: string }
+  | { type: "SET_IMAGE_URL"; payload: string }
+  | { type: "SET_DESCRIPTION"; payload: string }
+  | { type: "SET_PRICE"; payload: number };
+
+
+  

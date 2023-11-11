@@ -5,6 +5,7 @@ import NotFoundScreen from "../../pages/NotFoundScreen";
 import PetDetails from "../pet/PetDetails";
 import LoginScreen from "../../pages/LoginScreen";
 import SignupScreen from "../../pages/SignupScreen";
+import AddPet from "../../pages/AddPet";
 // import RouteGaurd from "./Routegaurd";
 
 const RouteManager = () => {
@@ -17,6 +18,7 @@ const RouteManager = () => {
         <Route path="/user/signup" element={<SignupScreen />} />
         <Route path="/favourite" element={<FavouriteScreen />} />
         <Route path="/pet/:id" element={<PetDetails />} />
+        <Route path="/pet/add" element={<AddPet />} />
         <Route path="*" element={<NotFoundScreen />} />
         {/* </Route> */}
       </Routes>

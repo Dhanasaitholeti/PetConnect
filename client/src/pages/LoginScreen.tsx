@@ -15,6 +15,7 @@ import axios from "axios";
 import { LoginFormData, LoginResponseData } from "../utils/types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ const LoginScreen = () => {
           variant: "solid",
           title: "Loggedin successfully",
         });
+        Cookies.set("authToken", data.token);
         navigate("/");
       },
       onError: (error) => {

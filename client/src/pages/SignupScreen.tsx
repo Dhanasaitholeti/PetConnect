@@ -14,7 +14,7 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-import { signupResponseData, singupFormData } from "../utils/types";
+import { commonCreationResponseData, singupFormData } from "../utils/types";
 
 const SignupScreen = () => {
   const toast = useToast();
@@ -32,7 +32,7 @@ const SignupScreen = () => {
       try {
         // Your login mutation logic using axios or another method
         const response = await axios.post(urls.signup, formData);
-        return response.data as signupResponseData;
+        return response.data as commonCreationResponseData;
       } catch (error) {
         // Handle errors, you may want to throw the error here to trigger the `onError` callback
         console.error("Login error:", error);
