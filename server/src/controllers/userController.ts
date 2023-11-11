@@ -37,7 +37,8 @@ export const userLogin = async (req: Request, res: Response) => {
 };
 
 export const userSignup = async (req: Request, res: Response) => {
-  const { email, name, Password } = req.body;
+  const { email, name, password } = req.body;
+  console.log(req.body);
   try {
     const EmailUsersData = await getUserDataWithEmail(email);
     if (EmailUsersData)
@@ -46,7 +47,7 @@ export const userSignup = async (req: Request, res: Response) => {
       });
 
     const salt = await bcrypt.genSalt(10);
-    const password_hash = await bcrypt.hash(Password, salt);
+    const password_hash = await bcrypt.hash(password, salt);
 
     const NewUser = await prisma.user.create({
       data: {
@@ -56,7 +57,7 @@ export const userSignup = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).json({ message: "Created New User", Data: NewUser });
+    res.status(201).json({ message: "Created New User" });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "unable to create new Account" });

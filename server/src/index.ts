@@ -7,7 +7,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 import MainRouter from "./router"; //for handleing the routes
-import socketServer from "socket"; // for websocket connections
+import socketServer from "./socket"; // for websocket connections
 
 const port = process.env.PORT || 8080;
 
