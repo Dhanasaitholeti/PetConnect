@@ -117,6 +117,8 @@ const AddPet = () => {
             >
               <option value="dogs">Dogs</option>
               <option value="cats">Cats</option>
+              <option value="rabbits">Rabbits</option>
+              <option value="squirrels">Squirrels</option>
               <option value="others">Others</option>
             </Select>
           </Box>
