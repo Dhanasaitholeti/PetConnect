@@ -30,7 +30,7 @@ const Navbar = () => {
       status: "info",
       isClosable: true,
       duration: 3000,
-      position: "top"
+      position: "top",
     });
   };
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             <BsFillHeartFill size={28} color="red" />
           </Link>
 
-          <Link to={"/messages"}>
+          <Link to={"/chats"}>
             <BsFillChatRightTextFill size={28} color="blue" />
           </Link>
 

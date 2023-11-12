@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 export const getPets = async (req: Request, res: Response) => {
   try {
     const petsData = await prisma.pet.findMany();
-    res.status(200).json([petsData]);
+    res.status(200).json(petsData);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "unabel to get the pets Data" });

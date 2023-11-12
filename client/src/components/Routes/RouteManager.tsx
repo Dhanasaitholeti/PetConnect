@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import HomeScreen from "../../pages/HomeScreen";
 import FavouriteScreen from "../../pages/FavouriteScreen";
 import NotFoundScreen from "../../pages/NotFoundScreen";
-import PetDetails from "../pet/PetDetails";
+import PetDetails from "../../pages/PetProfile";
 import LoginScreen from "../../pages/LoginScreen";
 import SignupScreen from "../../pages/SignupScreen";
 import AddPet from "../../pages/AddPet";

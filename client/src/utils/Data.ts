@@ -310,7 +310,7 @@ export const petsData = [
     price: 500,
   },
   {
-    id: "876543",
+    id: "876542",
     category: "others",
     breed: "Sugar Glider",
     description:
