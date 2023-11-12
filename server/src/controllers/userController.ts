@@ -29,7 +29,14 @@ export const userLogin = async (req: Request, res: Response) => {
       Email: EmailUsersData.email,
     });
 
-    res.status(200).json({ token });
+    res.status(200).json({
+      token,
+      user: {
+        id: EmailUsersData.id,
+        name: EmailUsersData.name,
+        email: EmailUsersData.email,
+      },
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "unable to login" });
@@ -74,5 +81,26 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.status(200).json({ data });
   } catch (error) {
     res.status(400).json({ message: "an error occured while gettign users" });
+  }
+};
+
+export const starPet = async (req: Request, res: Response) => {
+  const { userId, petId } = req.body;
+  try {
+    const data = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        favourites: {
+          connect: {
+            id: petId,
+          },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Error starring pet:", error);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };

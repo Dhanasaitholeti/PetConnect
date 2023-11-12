@@ -15,20 +15,22 @@ model user {
   name          String
   email         String
   password_hash String
-  pets          pet[]
+  pets          pet[]     @relation("userfavs")
   chats         chat[]
   messages      message[]
+  favourites    pet[]
 }
 
 model pet {
-  id          String @id @default(uuid())
-  category    String
-  breed       String
-  description String
-  image_url   String
-  price       Float
-  seller      user   @relation(fields: [userid], references: [id])
-  userid      String
+  id           String @id @default(uuid())
+  category     String
+  breed        String
+  description  String
+  image_url    String
+  price        Float
+  seller       user   @relation(fields: [userid], references: [id])
+  userid       String
+  starredUsers user[] @relation("userfavs")
 }
 
 model chat {
