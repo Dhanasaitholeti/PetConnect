@@ -1,3 +1,5 @@
+import { userType } from "./userSlices.types";
+
 export interface filtersType {
   category: string | undefined;
   price: string | undefined;
@@ -10,6 +12,7 @@ export interface LoginFormData {
 
 export interface LoginResponseData {
   token: string;
+  user: userType;
 }
 
 export interface singupFormData {

@@ -16,8 +16,11 @@ import { LoginFormData, LoginResponseData } from "../utils/types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { updateuser } from "../services/redux/slices/user.slice";
 
 const LoginScreen = () => {
+  const disptach = useDispatch();
   const navigate = useNavigate();
   const toast = useToast();
   const [formData, setFormData] = useState({
@@ -52,6 +55,7 @@ const LoginScreen = () => {
           title: "Loggedin successfully",
         });
         Cookies.set("authToken", data.token);
+        disptach(updateuser({ user: data.user, error: false }));
         navigate("/");
       },
       onError: (error) => {
@@ -64,6 +68,7 @@ const LoginScreen = () => {
           title: "Error occured",
           description: `${error.message} error has occured, Try Again`,
         });
+        disptach(updateuser({ user: null, error: true }));
       },
     });
   };
