@@ -42,7 +42,7 @@ const LoginScreen = () => {
   const handleLogin = () => {
     // Call the mutation function with the form data
     mutate(formData, {
-      onSuccess(data) {
+      onSuccess: (data) => {
         toast({
           isClosable: true,
           duration: 3000,

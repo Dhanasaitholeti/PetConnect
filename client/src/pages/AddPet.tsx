@@ -1,12 +1,14 @@
 import {
   Box,
   Button,
+  ButtonSpinner,
   Flex,
   FormLabel,
   Heading,
   Input,
   Select,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { useReducer } from "react";
 import {
@@ -40,6 +42,8 @@ const reducer = (state: State, action: Action): State => {
 };
 
 const AddPet = () => {
+  const toast = useToast();
+
   const { isPending, mutate } = useMutation({
     mutationFn: async (formData: newPetForm) => {
       const response = await axios.post(urls.addPet, formData);
@@ -58,10 +62,35 @@ const AddPet = () => {
 
   const handleSubmit = () => {
     // Implement your submission logic using the state values
-    mutate({
-      ...state,
-      userid: "safm",
-    });
+    mutate(
+      {
+        ...state,
+        userid: "4d60a02a-8d05-4ee7-9b8f-1433bd7eae3a",
+      },
+      {
+        onSuccess: () => {
+          toast({
+            isClosable: true,
+            duration: 3000,
+            status: "success",
+            position: "top",
+            variant: "solid",
+            title: "Pet added successfully",
+          });
+        },
+        onError: (error: Error) => {
+          toast({
+            isClosable: true,
+            duration: 3000,
+            status: "error",
+            position: "top",
+            variant: "solid",
+            title: "Error occured",
+            description: `${error.message} error has occured, Try Again`,
+          });
+        },
+      }
+    );
   };
 
   return (
@@ -146,7 +175,9 @@ const AddPet = () => {
           </Box>
         </Flex>
         <Flex>
-          <Button colorScheme="blue">submit</Button>
+          <Button colorScheme="blue" onClick={handleSubmit} w={"30%"}>
+            {isPending ? <ButtonSpinner /> : "submit"}
+          </Button>
         </Flex>
       </Flex>
     </>
@@ -154,12 +185,3 @@ const AddPet = () => {
 };
 
 export default AddPet;
-
-// id          String @id @default(uuid())
-// category    String
-// breed       String
-// description String
-// image_url   String
-// price       Float
-// seller      user   @relation(fields: [userid], references: [id])
-// userid      String

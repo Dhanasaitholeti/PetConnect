@@ -63,3 +63,16 @@ export const userSignup = async (req: Request, res: Response) => {
     res.status(400).json({ message: "unable to create new Account" });
   }
 };
+
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const data = await prisma.user.findMany({
+      include: {
+        pets: true,
+      },
+    });
+    res.status(200).json({ data });
+  } catch (error) {
+    res.status(400).json({ message: "an error occured while gettign users" });
+  }
+};
