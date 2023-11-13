@@ -12,12 +12,12 @@ import {
   CardHeader,
   Heading,
   Input,
-  useToast,
 } from "@chakra-ui/react";
 import { commonCreationResponseData, singupFormData } from "../utils/types";
+import useCustomToast from "../hooks/useCustomToast";
 
 const SignupScreen = () => {
-  const toast = useToast();
+  const showToast = useCustomToast();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -43,38 +43,27 @@ const SignupScreen = () => {
 
   const handleSignup = async () => {
     if (formData.password !== formData.confirmPassword) {
-      toast({
-        isClosable: true,
-        duration: 3000,
+      showToast({
         status: "error",
-        position: "top",
-        variant: "solid",
         title: "Password Mismatch",
         description: "Passwords do not match. Please try again.",
       });
+
       return;
     }
 
     mutate(formData, {
-      onSuccess(data) {
+      onSuccess: () => {
         navigate("/user/login");
-        toast({
-          isClosable: true,
-          duration: 3000,
+        showToast({
           status: "success",
-          position: "top",
-          variant: "solid",
           title: "New user Added",
           description: `Try to Login with credentials`,
         });
       },
       onError: (error: Error) => {
-        toast({
-          isClosable: true,
-          duration: 3000,
+        showToast({
           status: "error",
-          position: "top",
-          variant: "solid",
           title: "Error occured",
           description: `${error.message} error has occured, Try Again`,
         });

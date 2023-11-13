@@ -8,7 +8,6 @@ import {
   Input,
   Select,
   Textarea,
-  useToast,
 } from "@chakra-ui/react";
 import { useReducer } from "react";
 import {
@@ -21,6 +20,7 @@ import { urls } from "../configs/apis";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { RootState } from "../services/redux/store";
+import useCustomToast from "../hooks/useCustomToast";
 
 interface newPetForm extends State {
   userid: string;
@@ -44,7 +44,7 @@ const reducer = (state: State, action: Action): State => {
 };
 
 const AddPet = () => {
-  const toast = useToast();
+  const showToast = useCustomToast();
   const user = useSelector((state: RootState) => state.UserReducer.user);
 
   const { isPending, mutate } = useMutation({
@@ -72,22 +72,14 @@ const AddPet = () => {
       },
       {
         onSuccess: () => {
-          toast({
-            isClosable: true,
-            duration: 3000,
+          showToast({
             status: "success",
-            position: "top",
-            variant: "solid",
             title: "Pet added successfully",
           });
         },
         onError: (error: Error) => {
-          toast({
-            isClosable: true,
-            duration: 3000,
+          showToast({
             status: "error",
-            position: "top",
-            variant: "solid",
             title: "Error occured",
             description: `${error.message} error has occured, Try Again`,
           });

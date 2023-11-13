@@ -123,3 +123,11 @@ export const createChat = async (req: Request, res: Response) => {
     res.status(500).json({ message: "unabel to get the pets Data" });
   }
 };
+
+export const getUserByToken = async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ user: req.userData });
+  } catch (error) {
+    res.status(500).json({ message: "unable to get data" });
+  }
+};

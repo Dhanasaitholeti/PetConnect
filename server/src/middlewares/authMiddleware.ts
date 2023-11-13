@@ -4,8 +4,9 @@ import { Socket } from "socket.io";
 import { getUserDataWithEmail } from "../utils/helpers/emailData";
 
 interface UserData {
-  id: String;
-  email: String;
+  id: string;
+  email: string;
+  name: string;
 }
 
 declare module "socket.io" {
@@ -23,7 +24,7 @@ const socketAuth = async (socket: Socket, next: () => void) => {
     const data = await getUserDataWithEmail(authResult.Email);
     socket.userData = {
       ...socket.userData,
-      ...{ id: data.id, email: data.email },
+      ...{ id: data.id, email: data.email, name: data.name },
     };
     next();
   } catch (error) {
@@ -54,7 +55,10 @@ const authmiddleware = async (
       const token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_KEY) as JwtPayload;
       const data = await getUserDataWithEmail(decoded.Email);
-      req.userData = { ...req.userData, ...{ id: data.id, email: data.email } };
+      req.userData = {
+        ...req.userData,
+        ...{ id: data.id, email: data.email, name: data.name },
+      };
       next();
     } catch (error) {
       res.status(400).send("please try to login");

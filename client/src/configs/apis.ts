@@ -4,6 +4,7 @@ export const urls = {
   login: `${hostname}/user/login`,
   signup: `${hostname}/user/signup`,
   Enquire: `${hostname}/user/createchat`,
+  getuser: `${hostname}/user/getuser`,
   getPets: `${hostname}/pet/`,
   addPet: `${hostname}/pet/add`,
   updatePet: `${hostname}/pet/update`, //add id at last

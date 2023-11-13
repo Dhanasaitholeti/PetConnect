@@ -7,22 +7,23 @@ import {
   CardHeader,
   Heading,
   Input,
-  useToast,
 } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { urls } from "../configs/apis";
 import axios from "axios";
-import { LoginFormData, LoginResponseData } from "../utils/types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+
+import { urls } from "../configs/apis";
+import { LoginFormData, LoginResponseData } from "../utils/types";
 import { updateuser } from "../services/redux/slices/user.slice";
+import useCustomToast from "../hooks/useCustomToast";
 
 const LoginScreen = () => {
   const disptach = useDispatch();
   const navigate = useNavigate();
-  const toast = useToast();
+  const showToast = useCustomToast();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -46,12 +47,8 @@ const LoginScreen = () => {
     // Call the mutation function with the form data
     mutate(formData, {
       onSuccess: (data) => {
-        toast({
-          isClosable: true,
-          duration: 3000,
+        showToast({
           status: "success",
-          position: "top",
-          variant: "solid",
           title: "Loggedin successfully",
         });
         Cookies.set("authToken", data.token);
@@ -59,12 +56,8 @@ const LoginScreen = () => {
         navigate("/");
       },
       onError: (error) => {
-        toast({
-          isClosable: true,
-          duration: 3000,
+        showToast({
           status: "error",
-          position: "top",
-          variant: "solid",
           title: "Error occured",
           description: `${error.message} error has occured, Try Again`,
         });
