@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import GetDateTime from "../getDateTime";
 const prisma = new PrismaClient();
 
 export async function getUserChatsWithId(id: string) {
@@ -19,7 +20,7 @@ export async function getUserChatsWithId(id: string) {
             },
             select: {
               id: true,
-              Name: true,
+              name: true,
             },
           },
         },
@@ -68,4 +69,33 @@ export async function getChatPartner(ChatId: string, senderId: string) {
   });
   console.log(chatpartnerdata);
   return chatpartnerdata;
+}
+
+export async function addConnectionStatus(
+  userId: string,
+  connectionId: string
+) {
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      connectionId,
+    },
+  });
+}
+
+export async function removeConnectionStatus(userId: string) {
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        connectionId: "", // Set the status to "InActive"
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }

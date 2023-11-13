@@ -1,14 +1,12 @@
 import Cookies from "js-cookie";
 import { Socket, io } from "socket.io-client";
-import { useDispatch } from "react-redux";
+
 import { socketUrls } from "../../configs/apis";
 
 let socket: Socket | null = null;
 
 const InitializeSocket = () => {
-  const dispatcher = useDispatch();
-
-  if (Cookies.get("SynkToken") && !socket) {
+  if (Cookies.get("authToken") && !socket) {
     socket = io(socketUrls.connectionUrl, {
       auth: {
         token: Cookies.get("authToken"),
