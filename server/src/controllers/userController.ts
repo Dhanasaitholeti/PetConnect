@@ -76,6 +76,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     const data = await prisma.user.findMany({
       include: {
         pets: true,
+        chats: true,
       },
     });
     res.status(200).json({ data });
@@ -102,5 +103,23 @@ export const starPet = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error starring pet:", error);
     return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const createChat = async (req: Request, res: Response) => {
+  const { user1Id, user2Id } = req.body;
+  console.log(req.body);
+  try {
+    const newChat = await prisma.chat.create({
+      data: {
+        members: {
+          connect: [{ id: user1Id }, { id: user2Id }],
+        },
+      },
+    });
+    res.status(201).json({ message: "chat created successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "unabel to get the pets Data" });
   }
 };

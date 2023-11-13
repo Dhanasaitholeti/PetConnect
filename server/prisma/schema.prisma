@@ -15,6 +15,7 @@ model user {
   name          String
   email         String
   password_hash String
+  connectionId  String?
   pets          pet[]     @relation("userfavs")
   chats         chat[]
   messages      message[]
