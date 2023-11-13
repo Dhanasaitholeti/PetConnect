@@ -49,3 +49,8 @@ export interface PetType {
   image_url: string;
   userid: string;
 }
+
+export interface EnquirePetType {
+  user1Id: string;
+  user2Id: string;
+}

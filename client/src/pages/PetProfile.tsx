@@ -1,17 +1,68 @@
-import { Image, Heading, Text, Button, Flex } from "@chakra-ui/react";
+import { Image, Heading, Text, Button, Flex, useToast } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "../services/redux/store";
+import { useMutation } from "@tanstack/react-query";
+import { urls } from "../configs/apis";
+import axios from "axios";
+import { EnquirePetType, commonCreationResponseData } from "../utils/types";
 
 const PetDetails = () => {
+  const toast = useToast();
+  const navigate = useNavigate();
   const location = useLocation();
   const idFromUrl = location.pathname.split("/")[2];
   const pet = useSelector((state: RootState) =>
     state.PetReducer.pets?.find((entry) => entry.id === idFromUrl)
   );
+  const currUser = useSelector((state: RootState) => state.UserReducer.user);
+  console.log(currUser);
 
-  const handleEnquire = () => {
-    console.log("looged data");
+  const { mutate: enquire } = useMutation({
+    mutationFn: async (formData: EnquirePetType) => {
+      console.log("working");
+      try {
+        const response = await axios.post(urls.Enquire, formData);
+        return response.data as commonCreationResponseData;
+      } catch (error) {
+        console.error("Login error:", error);
+        throw error;
+      }
+    },
+  });
+
+  const handleEnquire = (sellerId: string, buyerId: string) => {
+    console.log("working");
+
+    enquire(
+      {
+        user1Id: sellerId,
+        user2Id: buyerId,
+      },
+      {
+        onSuccess: () => {
+          toast({
+            isClosable: true,
+            duration: 3000,
+            status: "success",
+            position: "top",
+            variant: "solid",
+            title: "chat creation successful",
+          });
+          navigate("/chats");
+        },
+        onError: () => {
+          toast({
+            isClosable: true,
+            duration: 3000,
+            status: "error",
+            position: "top",
+            variant: "solid",
+            title: "chat creation failed",
+          });
+        },
+      }
+    );
   };
 
   return (
@@ -57,10 +108,14 @@ const PetDetails = () => {
             <strong>Seller ID:</strong> {pet?.userid}
           </Text>
           <Flex alignItems={"center"} gap={5}>
-            <Button onClick={handleEnquire} colorScheme="pink" mt={4}>
+            <Button colorScheme="pink" mt={4}>
               Favourite
             </Button>
-            <Button onClick={handleEnquire} colorScheme="teal" mt={4}>
+            <Button
+              onClick={() => handleEnquire(pet!.userid, currUser!.id)}
+              colorScheme="teal"
+              mt={4}
+            >
               Enquire
             </Button>
           </Flex>

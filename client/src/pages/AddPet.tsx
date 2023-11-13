@@ -19,6 +19,8 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { urls } from "../configs/apis";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../services/redux/store";
 
 interface newPetForm extends State {
   userid: string;
@@ -43,6 +45,7 @@ const reducer = (state: State, action: Action): State => {
 
 const AddPet = () => {
   const toast = useToast();
+  const user = useSelector((state: RootState) => state.UserReducer.user);
 
   const { isPending, mutate } = useMutation({
     mutationFn: async (formData: newPetForm) => {
@@ -65,7 +68,7 @@ const AddPet = () => {
     mutate(
       {
         ...state,
-        userid: "4d60a02a-8d05-4ee7-9b8f-1433bd7eae3a",
+        userid: user!.id,
       },
       {
         onSuccess: () => {

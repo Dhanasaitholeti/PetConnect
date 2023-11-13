@@ -1,12 +1,6 @@
-import {
-  Box,
-  Grid,
-  GridItem,
-  Heading,
-  List,
-  ListItem,
-  Text,
-} from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
+import ChatsSidebar from "../components/chat/ChatsSidebar";
+import ChatsSection from "../components/chat/ChatsSection";
 
 const ChatScreen = () => {
   return (
@@ -18,22 +12,12 @@ const ChatScreen = () => {
         templateColumns={"repeat(5,1fr)"}
         shadow={"md"}
       >
-        <GridItem p={4} bgColor={"gray.200"}>
-          <Heading mb={4}>Chat List</Heading>
-          <List spacing={2}>
-            <ListItem>
-              <Text fontWeight="bold">Chat 1</Text>
-            </ListItem>
-          </List>
+        <GridItem>
+          <ChatsSidebar />
         </GridItem>
 
-        <GridItem p={4} colSpan={4}>
-          <p>
-            render chats Lorem ipsum, dolor sit amet consectetur adipisicing
-            elit. Officia quas totam mollitia, vel eius tempore non consectetur
-            quia minima ducimus error facilis debitis quos at cum inventore sunt
-            itaque. Atque.
-          </p>
+        <GridItem p={4} colSpan={4} overflow={"scroll"}>
+          <ChatsSection />
         </GridItem>
       </Grid>
     </>

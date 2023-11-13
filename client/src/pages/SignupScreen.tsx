@@ -56,9 +56,8 @@ const SignupScreen = () => {
     }
 
     mutate(formData, {
-      onSuccess(data, variables, context) {
-        console.log(data, variables, context);
-        navigate("/login");
+      onSuccess(data) {
+        navigate("/user/login");
         toast({
           isClosable: true,
           duration: 3000,
