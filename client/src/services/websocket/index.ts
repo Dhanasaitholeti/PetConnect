@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import { Socket, io } from "socket.io-client";
-
 import { socketUrls } from "../../configs/apis";
 
 let socket: Socket | null = null;

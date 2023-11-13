@@ -80,7 +80,7 @@ export async function addConnectionStatus(
       id: userId,
     },
     data: {
-      connectionId,
+      connectionId: connectionId,
     },
   });
 }

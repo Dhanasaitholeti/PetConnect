@@ -2,7 +2,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import ChatsSidebar from "../components/chat/ChatsSidebar";
 import ChatsSection from "../components/chat/ChatsSection";
 import { useEffect } from "react";
-import { InitializeSocket, socket } from "../services/webscoket";
+import { InitializeSocket, socket } from "../services/websocket";
 
 const ChatScreen = () => {
   useEffect(() => {

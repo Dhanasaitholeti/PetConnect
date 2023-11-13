@@ -5,7 +5,6 @@ import {
   getUserChatsWithId,
 } from "./handlerHelpers";
 
-
 export async function sendDatatoConncetion(
   io: Server,
   socket: Socket,
@@ -27,5 +26,5 @@ export async function sendDatatoConncetion(
 
 export const initialData = async (io: Server, socket: Socket) => {
   const chatsData = await getUserChatsWithId(socket.userData.id.toString());
-  io.to(chatsData.connectionId).emit("chatsData", chatsData);
+  io.to(chatsData.connectionId).emit("initialData", chatsData);
 };

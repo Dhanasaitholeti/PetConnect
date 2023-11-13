@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { RootState } from "../../services/redux/store";
 import axios from "axios";
 import { urls } from "../../configs/apis";
@@ -7,7 +7,6 @@ import Cookies from "js-cookie";
 import { updateuser } from "../../services/redux/slices/user.slice";
 
 const RouteGaurd = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
   const { user, error } = useSelector((state: RootState) => state.UserReducer);
 
@@ -20,7 +19,7 @@ const RouteGaurd = () => {
     dispatch(updateuser({ user: response.data.user, error: false }));
   };
 
-  if (!user || error) {
+  if (Cookies.get("authToken") && (!user || error)) {
     getuser();
   }
 
