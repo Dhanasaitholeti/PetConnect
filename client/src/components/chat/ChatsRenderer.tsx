@@ -16,7 +16,7 @@ const ChatsRenderer = () => {
   );
 
 
-  console.log(chats)
+  console.log()
 
   if (!chats) {
     return <p>welcome to chat screen</p>;

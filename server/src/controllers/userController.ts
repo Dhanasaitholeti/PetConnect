@@ -115,8 +115,26 @@ export const starPet = async (req: Request, res: Response) => {
 
 export const createChat = async (req: Request, res: Response) => {
   const { user1Id, user2Id } = req.body;
-  console.log(req.body);
+
   try {
+    const chatExists = await prisma.chat.findFirst({
+      where: {
+        members: {
+          every: {
+            id: {
+              in: [user1Id, user2Id],
+            },
+          },
+        },
+      },
+    });
+
+    if (chatExists) {
+      return res
+        .status(200)
+        .json({ message: "chat already exists", chatid: chatExists.id });
+    }
+
     const newChat = await prisma.chat.create({
       data: {
         members: {

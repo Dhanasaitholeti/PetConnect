@@ -7,7 +7,7 @@ const ChatsSidebar = () => {
   const chatslist = useSelector((state: RootState) => state.ChatReducer.list);
 
   return (
-    <Box p={4} height="100%" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
+    <Box p={4} height="100%" borderRight={"1px solid gray"}>
       <Heading mb={4} fontSize="xl">
         Chat List
       </Heading>

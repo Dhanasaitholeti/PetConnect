@@ -4,10 +4,7 @@ import ChatsSection from "../components/chat/ChatsSection";
 import { useEffect } from "react";
 import { InitializeSocket, socket } from "../services/websocket";
 
-
 const ChatScreen = () => {
-
-
   useEffect(() => {
     if (!socket?.connected) {
       InitializeSocket();
@@ -30,7 +27,7 @@ const ChatScreen = () => {
         <GridItem>
           <ChatsSidebar />
         </GridItem>
-        <GridItem p={4} colSpan={4} overflowY={"scroll"}>
+        <GridItem p={4} colSpan={4}>
           <ChatsSection />
         </GridItem>
       </Grid>

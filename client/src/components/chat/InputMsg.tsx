@@ -10,42 +10,39 @@ import { RootState } from "../../services/redux/store";
 import { useLocation } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { GetDateTime } from "../../utils/helpers/getDateTime";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { newMsgs } from "../../services/redux/slices/chat.slice";
 import { emitMessage } from "../../services/websocket";
 
-interface Props {
-  defaultmsg?: string;
-}
-
-const InputMsg: React.FC<Props> = ({ defaultmsg }) => {
-  const [msg, setMsg] = useState("");
+const InputMsg = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-
   const currentuser = useSelector((state: RootState) => state.UserReducer.user);
   const queryParams = new URLSearchParams(location.search);
   const chatId = queryParams.get("id");
 
-  const createMsgObj = (content?: string) => {
+  const chats = useSelector(
+    (state: RootState) =>
+      chatId && state.ChatReducer.chats && state.ChatReducer.chats[chatId!]
+  );
+
+  const [msg, setMsg] = useState("");
+
+  useEffect(() => {
+    if (chats && chats.length < 1) {
+      setMsg("I am interested in buying this pet,let's discuss further");
+    }
+  }, []);
+
+  const createMsgObj = () => {
     return {
       id: uuidv4(),
-      content: content || msg,
+      content: msg,
       senderId: currentuser?.id!,
       chatId: chatId!,
       sentTime: GetDateTime(),
     };
   };
-
-  if (defaultmsg) {
-    const firstMsg = createMsgObj(defaultmsg);
-    dispatch(newMsgs({ message: firstMsg }));
-    emitMessage({
-      content: defaultmsg,
-      senderId: currentuser?.id,
-      chatId,
-    });
-  }
 
   const handleOnChange = (e: any) => {
     setMsg(e.target.value);
@@ -63,7 +60,7 @@ const InputMsg: React.FC<Props> = ({ defaultmsg }) => {
   };
 
   return (
-    <InputGroup>
+    <InputGroup pos={"relative"} zIndex={10}>
       <Input
         onChange={(e) => handleOnChange(e)}
         type="text"
@@ -75,7 +72,7 @@ const InputMsg: React.FC<Props> = ({ defaultmsg }) => {
         _hover={{ borderColor: "gray.400" }}
         _focus={{ borderColor: "teal.500", boxShadow: "outline" }}
       />
-      <InputRightElement width="4.5rem" onClick={handleSendMsg}>
+      <InputRightElement width="4.5rem" onClick={handleSendMsg} pos={"inherit"}>
         <IconButton
           colorScheme="teal"
           aria-label="Send message"

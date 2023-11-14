@@ -54,7 +54,6 @@ const PetDetails = () => {
       },
       {
         onSuccess: (data) => {
-          console.log(data.chatid);
           showToast({
             status: "success",
             title: "Enquiry creation successful",
