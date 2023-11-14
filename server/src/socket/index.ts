@@ -8,6 +8,7 @@ const socketServer = (io: Server) => {
   io.use(socketAuth).on("connection", async (socket) => {
     console.log("socket connection succeded", socket.id);
     addConnectionStatus(socket.userData.id, socket.id);
+    
     initialData(io, socket);
     eventHandler(io, socket);
   });

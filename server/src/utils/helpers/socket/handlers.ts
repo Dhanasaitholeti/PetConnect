@@ -26,5 +26,5 @@ export async function sendDatatoConncetion(
 
 export const initialData = async (io: Server, socket: Socket) => {
   const chatsData = await getUserChatsWithId(socket.userData.id.toString());
-  io.to(chatsData.connectionId).emit("initialData", chatsData);
+  io.to(socket.id).emit("initialData", chatsData);
 };

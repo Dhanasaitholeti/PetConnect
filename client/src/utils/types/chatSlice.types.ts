@@ -7,13 +7,13 @@ export interface messageType {
 }
 export interface chatsusers {
   id: string;
-  Partner: string;
+  partner: string;
 }
 
 export type individualChat = Record<string, messageType[]>;
 
 export interface chatStateType {
   list: chatsusers[] | null;
-  chats: individualChat[] | null;
+  chats: individualChat | null;
   error: boolean;
 }

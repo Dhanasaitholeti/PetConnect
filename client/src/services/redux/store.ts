@@ -13,6 +13,7 @@ export const store = configureStore({
     UserReducer,
     ChatReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
 });
 
 export type AppDispatch = typeof store.dispatch;

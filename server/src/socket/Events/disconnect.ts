@@ -1,5 +1,5 @@
 import { Socket } from "socket.io";
-import { removeConnectionStatus } from "utils/helpers/socket/handlerHelpers";
+import { removeConnectionStatus } from "../../utils/helpers/socket/handlerHelpers";
 
 const disconnect = (socket: Socket) => {
   socket.on("disconnect", async () => {
