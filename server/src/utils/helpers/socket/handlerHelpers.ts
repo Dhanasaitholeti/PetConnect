@@ -67,7 +67,7 @@ export async function getChatPartner(ChatId: string, senderId: string) {
       },
     },
   });
-  console.log(chatpartnerdata);
+
   return chatpartnerdata;
 }
 
@@ -92,7 +92,7 @@ export async function removeConnectionStatus(userId: string) {
         id: userId,
       },
       data: {
-        connectionId: "", // Set the status to "InActive"
+        connectionId: null, // Set the status to "InActive"
       },
     });
   } catch (error) {

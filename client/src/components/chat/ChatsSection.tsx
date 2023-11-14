@@ -3,6 +3,7 @@ import InputMsg from "./InputMsg";
 import ChatsRenderer from "./ChatsRenderer";
 
 const ChatsSection = () => {
+  
   return (
     <Flex flexDir="column" height="100%" justifyContent="space-between">
       <ChatsRenderer />

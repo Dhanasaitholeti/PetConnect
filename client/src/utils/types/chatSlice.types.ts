@@ -5,6 +5,7 @@ export interface messageType {
   chatId: string;
   sentTime: string;
 }
+
 export interface chatsusers {
   id: string;
   partner: string;

@@ -1,21 +1,15 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import ChatsSidebar from "../components/chat/ChatsSidebar";
 import ChatsSection from "../components/chat/ChatsSection";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { InitializeSocket, socket } from "../services/websocket";
-import { RootState } from "../services/redux/store";
 
 const ChatScreen = () => {
-  const dispatch = useDispatch();
-  const chats = useSelector((state: RootState) => state.ChatReducer);
-  console.log(chats);
-
   useEffect(() => {
     if (!socket?.connected) {
       InitializeSocket();
     }
-    
+
     return () => {
       socket?.disconnect();
     };

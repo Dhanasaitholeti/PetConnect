@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { chatStateType } from "../../../utils/types/chatSlice.types";
+import {
+  chatStateType,
+  messageType,
+} from "../../../utils/types/chatSlice.types";
+
+interface newMgstype {
+  message: messageType;
+}
 
 const initialState: chatStateType = {
   list: null,
@@ -17,7 +24,17 @@ const chatSlice = createSlice({
       state.list = action.payload.list;
       state.error = action.payload.error;
     },
-    newMsgs: (state, action: PayloadAction<chatStateType>) => {},
+
+    newMsgs: (state, action: PayloadAction<newMgstype>) => {
+      const msg = action.payload.message;
+      if (!state.chats) {
+        state.chats = {};
+      }
+      if (!state.chats[msg.chatId]) {
+        state.chats[msg.chatId] = [];
+      }
+      state.chats[msg.chatId].push(msg);
+    },
   },
 });
 

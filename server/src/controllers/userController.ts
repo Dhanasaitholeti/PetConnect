@@ -76,7 +76,13 @@ export const getAllUsers = async (req: Request, res: Response) => {
     const data = await prisma.user.findMany({
       include: {
         pets: true,
-        chats: true,
+        chats: {
+          select: {
+            id: true,
+            members: true,
+            messages: true,
+          },
+        },
       },
     });
     res.status(200).json({ data });

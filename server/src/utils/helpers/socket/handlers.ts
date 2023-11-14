@@ -7,7 +7,6 @@ import {
 
 export async function sendDatatoConncetion(
   io: Server,
-  socket: Socket,
   Data: { chatId: string; senderId: string; content: string }
 ) {
   const { chatId, senderId, content } = Data;
@@ -15,10 +14,11 @@ export async function sendDatatoConncetion(
     const newmsg = await createMessage(chatId, senderId, content);
 
     const ChatpartnerData = await getChatPartner(chatId, senderId);
-    io.to(ChatpartnerData.members[0].connectionId).emit(
-      "receive_messages",
-      newmsg
-    );
+    if (ChatpartnerData.members[0].connectionId)
+      io.to(ChatpartnerData.members[0].connectionId).emit(
+        "receive_messages",
+        newmsg
+      );
   } catch (err) {
     console.log(err);
   }
