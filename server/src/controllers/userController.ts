@@ -124,7 +124,9 @@ export const createChat = async (req: Request, res: Response) => {
         },
       },
     });
-    res.status(201).json({ message: "chat created successfully" });
+    res
+      .status(201)
+      .json({ message: "chat created successfully", chatid: newChat.id });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "unabel to get the pets Data" });

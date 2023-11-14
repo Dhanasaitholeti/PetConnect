@@ -4,7 +4,10 @@ import ChatsSection from "../components/chat/ChatsSection";
 import { useEffect } from "react";
 import { InitializeSocket, socket } from "../services/websocket";
 
+
 const ChatScreen = () => {
+
+
   useEffect(() => {
     if (!socket?.connected) {
       InitializeSocket();

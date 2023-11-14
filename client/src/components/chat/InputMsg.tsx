@@ -14,7 +14,11 @@ import { useState } from "react";
 import { newMsgs } from "../../services/redux/slices/chat.slice";
 import { emitMessage } from "../../services/websocket";
 
-const InputMsg = () => {
+interface Props {
+  defaultmsg?: string;
+}
+
+const InputMsg: React.FC<Props> = ({ defaultmsg }) => {
   const [msg, setMsg] = useState("");
   const location = useLocation();
   const dispatch = useDispatch();
@@ -23,15 +27,25 @@ const InputMsg = () => {
   const queryParams = new URLSearchParams(location.search);
   const chatId = queryParams.get("id");
 
-  const createMsgObj = () => {
+  const createMsgObj = (content?: string) => {
     return {
       id: uuidv4(),
-      content: msg,
+      content: content || msg,
       senderId: currentuser?.id!,
       chatId: chatId!,
       sentTime: GetDateTime(),
     };
   };
+
+  if (defaultmsg) {
+    const firstMsg = createMsgObj(defaultmsg);
+    dispatch(newMsgs({ message: firstMsg }));
+    emitMessage({
+      content: defaultmsg,
+      senderId: currentuser?.id,
+      chatId,
+    });
+  }
 
   const handleOnChange = (e: any) => {
     setMsg(e.target.value);

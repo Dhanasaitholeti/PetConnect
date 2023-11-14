@@ -15,6 +15,9 @@ const ChatsRenderer = () => {
       chatId && state.ChatReducer.chats && state.ChatReducer.chats[chatId!]
   );
 
+
+  console.log(chats)
+
   if (!chats) {
     return <p>welcome to chat screen</p>;
   }

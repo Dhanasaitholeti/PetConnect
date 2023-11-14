@@ -8,6 +8,10 @@ import axios from "axios";
 import { EnquirePetType, commonCreationResponseData } from "../utils/types";
 import useCustomToast from "../hooks/useCustomToast";
 
+interface enquirePetResponseType extends commonCreationResponseData {
+  chatid: string;
+}
+
 const PetDetails = () => {
   const showToast = useCustomToast();
   const navigate = useNavigate();
@@ -22,7 +26,7 @@ const PetDetails = () => {
     mutationFn: async (formData: EnquirePetType) => {
       try {
         const response = await axios.post(urls.Enquire, formData);
-        return response.data as commonCreationResponseData;
+        return response.data as enquirePetResponseType;
       } catch (error) {
         console.error("Login error:", error);
         throw error;
@@ -49,17 +53,23 @@ const PetDetails = () => {
         user2Id: buyerId,
       },
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
+          console.log(data.chatid);
           showToast({
             status: "success",
-            title: "chat creation successful",
+            title: "Enquiry creation successful",
           });
-          navigate("/chats");
+          navigate(`/chats/?id=${data.chatid}`, {
+            state: {
+              defaultmsg:
+                "I am intrested in buying this pet, let's discuss further",
+            },
+          });
         },
         onError: () => {
           showToast({
             status: "error",
-            title: "chat creation failed",
+            title: "Enquiry creation failed",
           });
         },
       }
