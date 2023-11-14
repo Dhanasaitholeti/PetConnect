@@ -1,8 +1,9 @@
 const hostname = "http://localhost:8000";
 
 export const urls = {
-  login: `${hostname}/user/login`,
-  signup: `${hostname}/user/signup`,
+  login: `${hostname}/user/login`, //
+  signup: `${hostname}/user/signup`, //
+  starpet: `${hostname}/user/starit`, //
   Enquire: `${hostname}/user/createchat`,
   getuser: `${hostname}/user/getuser`,
   getPets: `${hostname}/pet/`,

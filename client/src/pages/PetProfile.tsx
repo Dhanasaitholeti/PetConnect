@@ -1,4 +1,4 @@
-import { Image, Heading, Text, Button, Flex, useToast } from "@chakra-ui/react";
+import { Image, Heading, Text, Button, Flex } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "../services/redux/store";
@@ -6,21 +6,20 @@ import { useMutation } from "@tanstack/react-query";
 import { urls } from "../configs/apis";
 import axios from "axios";
 import { EnquirePetType, commonCreationResponseData } from "../utils/types";
+import useCustomToast from "../hooks/useCustomToast";
 
 const PetDetails = () => {
-  const toast = useToast();
+  const showToast = useCustomToast();
   const navigate = useNavigate();
   const location = useLocation();
   const idFromUrl = location.pathname.split("/")[2];
   const pet = useSelector((state: RootState) =>
     state.PetReducer.pets?.find((entry) => entry.id === idFromUrl)
   );
-  const currUser = useSelector((state: RootState) => state.UserReducer.user);
-  console.log(currUser);
+  const currentUser = useSelector((state: RootState) => state.UserReducer.user);
 
   const { mutate: enquire } = useMutation({
     mutationFn: async (formData: EnquirePetType) => {
-      console.log("working");
       try {
         const response = await axios.post(urls.Enquire, formData);
         return response.data as commonCreationResponseData;
@@ -31,9 +30,19 @@ const PetDetails = () => {
     },
   });
 
-  const handleEnquire = (sellerId: string, buyerId: string) => {
-    console.log("working");
+  const { mutate: starit } = useMutation({
+    mutationFn: async (data: { userId: string; petId: string }) => {
+      try {
+        const response = await axios.post(urls.starpet, data);
+        return response.data as commonCreationResponseData;
+      } catch (error) {
+        console.error("Login error:", error);
+        throw error;
+      }
+    },
+  });
 
+  const handleEnquire = (sellerId: string, buyerId: string) => {
     enquire(
       {
         user1Id: sellerId,
@@ -41,28 +50,28 @@ const PetDetails = () => {
       },
       {
         onSuccess: () => {
-          toast({
-            isClosable: true,
-            duration: 3000,
+          showToast({
             status: "success",
-            position: "top",
-            variant: "solid",
             title: "chat creation successful",
           });
           navigate("/chats");
         },
         onError: () => {
-          toast({
-            isClosable: true,
-            duration: 3000,
+          showToast({
             status: "error",
-            position: "top",
-            variant: "solid",
             title: "chat creation failed",
           });
         },
       }
     );
+  };
+
+  const handleStarIt = () => {
+    if (currentUser)
+      starit({
+        userId: currentUser?.id,
+        petId: idFromUrl,
+      });
   };
 
   return (
@@ -108,11 +117,11 @@ const PetDetails = () => {
             <strong>Seller ID:</strong> {pet?.userid}
           </Text>
           <Flex alignItems={"center"} gap={5}>
-            <Button colorScheme="pink" mt={4}>
+            <Button colorScheme="pink" mt={4} onClick={handleStarIt}>
               Favourite
             </Button>
             <Button
-              onClick={() => handleEnquire(pet!.userid, currUser!.id)}
+              onClick={() => handleEnquire(pet!.userid, currentUser!.id)}
               colorScheme="teal"
               mt={4}
             >

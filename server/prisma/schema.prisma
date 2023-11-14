@@ -16,10 +16,10 @@ model user {
   email         String
   password_hash String
   connectionId  String?
-  pets          pet[]     @relation("userfavs")
+  pets          pet[]
   chats         chat[]
   messages      message[]
-  favourites    pet[]
+  favourites    pet[]     @relation("userfavs")
 }
 
 model pet {
