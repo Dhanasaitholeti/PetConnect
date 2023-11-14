@@ -138,3 +138,29 @@ export const getUserByToken = async (req: Request, res: Response) => {
     res.status(500).json({ message: "unable to get data" });
   }
 };
+
+export const getFavourites = async (req: Request, res: Response) => {
+  try {
+    const favs = await prisma.user.findFirst({
+      where: {
+        id: req.userData.id,
+      },
+      include: {
+        favourites: {
+          select: {
+            id: true,
+            breed: true,
+            category: true,
+            description: true,
+            image_url: true,
+            price: true,
+            userid: true,
+          },
+        },
+      },
+    });
+    res.status(200).json({ data: favs });
+  } catch (error) {
+    res.status(500).json({ message: "unable to get data" });
+  }
+};

@@ -38,7 +38,8 @@ export type addPetAction =
   | { type: "SET_BREED"; payload: string }
   | { type: "SET_IMAGE_URL"; payload: string }
   | { type: "SET_DESCRIPTION"; payload: string }
-  | { type: "SET_PRICE"; payload: number };
+  | { type: "SET_PRICE"; payload: number }
+  | { type: "RESET_FORM" };
 
 export interface PetType {
   id: string;

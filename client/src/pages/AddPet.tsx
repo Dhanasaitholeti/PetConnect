@@ -38,6 +38,15 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, description: action.payload };
     case "SET_PRICE":
       return { ...state, price: action.payload };
+    case "RESET_FORM":
+      return {
+        ...state,
+        category: "",
+        breed: "",
+        imageUrl: "",
+        description: "",
+        price: 0,
+      };
     default:
       return state;
   }
@@ -76,6 +85,7 @@ const AddPet = () => {
             status: "success",
             title: "Pet added successfully",
           });
+          dispatch({ type: "RESET_FORM" });
         },
         onError: (error: Error) => {
           showToast({

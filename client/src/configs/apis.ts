@@ -5,6 +5,7 @@ export const urls = {
   signup: `${hostname}/user/signup`, //
   starpet: `${hostname}/user/starit`, //
   Enquire: `${hostname}/user/createchat`,
+  favourites: `${hostname}/user/favourites`,
   getuser: `${hostname}/user/getuser`,
   getPets: `${hostname}/pet/`,
   addPet: `${hostname}/pet/add`,
