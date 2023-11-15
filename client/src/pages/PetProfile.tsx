@@ -86,12 +86,12 @@ const PetDetails = () => {
   return (
     <>
       <Flex
-        alignItems="center"
+        alignItems="flex-start"
         justifyContent="center"
         gap={10}
         p={4}
         boxShadow="lg"
-        maxW={"60%"}
+        maxW={{ sm: "90%", xl: "70%" }}
         margin="auto"
         flexDirection={{ base: "column", md: "row" }}
         mb={8}
@@ -109,11 +109,11 @@ const PetDetails = () => {
           mb={{ base: 4, md: 0 }}
         />
 
-        <Flex flexDir={"column"}>
+        <Flex flexDir={"column"} pt={5} gap={2}>
           <Heading as="h2" size="lg" mb={2}>
             {pet?.breed}
           </Heading>
-          <Text fontSize="md" mb={2}>
+          <Text fontSize="lg" fontWeight={"semibold"} mb={2}>
             {pet?.description}
           </Text>
           <Text>

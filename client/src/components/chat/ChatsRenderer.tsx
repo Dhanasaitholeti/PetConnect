@@ -3,9 +3,12 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { RootState } from "../../services/redux/store";
 import { messageType } from "../../utils/types/chatSlice.types";
+import { useEffect, useRef } from "react";
 
 const ChatsRenderer = () => {
   const location = useLocation();
+  const endRef = useRef<HTMLDivElement>(null);
+
   const queryParams = new URLSearchParams(location.search);
   const chatId = queryParams.get("id");
 
@@ -14,7 +17,13 @@ const ChatsRenderer = () => {
     (state: RootState) =>
       chatId && state.ChatReducer.chats && state.ChatReducer.chats[chatId!]
   );
+  const scrollToBottom = () => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [chats]);
 
   if (!chats) {
     return <p>welcome to chat screen</p>;
@@ -28,7 +37,13 @@ const ChatsRenderer = () => {
             key={message.id}
             p={2}
             borderRadius="md"
-            bg={message.senderId === currentuser?.id ? "teal.200" : "gray.200"}
+            bg={message.senderId === currentuser?.id ? "blue.500" : "gray.200"}
+            textColor={
+              message.senderId === currentuser?.id
+                ? "whiteAlpha.800"
+                : "blackAlpha.800"
+            }
+            fontWeight={"semibold"}
             alignSelf={
               message.senderId === currentuser?.id ? "flex-end" : "flex-start"
             }
@@ -40,6 +55,7 @@ const ChatsRenderer = () => {
       ) : (
         <p>start a conversation....</p>
       )}
+      <div ref={endRef}></div>
     </Flex>
   );
 };

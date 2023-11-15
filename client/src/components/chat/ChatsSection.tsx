@@ -1,5 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import InputMsg from "./InputMsg";
+import MessageInputBar from "./MessageInputBar";
 import ChatsRenderer from "./ChatsRenderer";
 
 const ChatsSection = () => {
@@ -9,7 +9,7 @@ const ChatsSection = () => {
         <ChatsRenderer />
       </GridItem>
       <GridItem rowSpan={1}>
-        <InputMsg />
+        <MessageInputBar />
       </GridItem>
     </Grid>
   );

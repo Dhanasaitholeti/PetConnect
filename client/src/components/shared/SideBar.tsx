@@ -23,7 +23,12 @@ const SideBar = () => {
   }, [filter]);
 
   return (
-    <Flex flexDir={"column"} gap={5} p={4} pos={"fixed"}>
+    <Flex
+      flexDir={{ sm: "row", xl: "column" }}
+      gap={10}
+      p={4}
+      pos={{ sm: "inherit", xl: "fixed" }}
+    >
       <Flex flexDir={"column"}>
         <Heading size="md" mb={2}>
           Filter by Category:

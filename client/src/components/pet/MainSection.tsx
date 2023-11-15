@@ -18,20 +18,26 @@ const MainSection = () => {
   const dispatch = useDispatch();
   const { error, pets } = useSelector((state: RootState) => state.PetReducer);
 
-  let filteredPets = pets;
+  let filteredPets;
 
   if (category) {
     filteredPets =
       pets &&
       pets?.filter((pet) => pet.category === category.toLocaleLowerCase());
+  } else {
+    filteredPets = pets;
   }
 
   if (price) {
+    let sortedPets = filteredPets && [...filteredPets]; // Create a copy of the array
+
     if (price === "low-to-high") {
-      filteredPets?.sort((a, b) => a.price - b.price);
+      sortedPets?.sort((a, b) => a.price - b.price);
     } else if (price === "high-to-low") {
-      filteredPets?.sort((a, b) => b.price - a.price);
+      sortedPets?.sort((a, b) => b.price - a.price);
     }
+
+    filteredPets = sortedPets; // Assign the sorted array back to filteredPets
   }
 
   useQuery({
@@ -51,7 +57,7 @@ const MainSection = () => {
 
   return (
     <>
-      <SimpleGrid columns={[2, null, 3]} gap={10}>
+      <SimpleGrid columns={[2, null, 3, 3, 4]} gap={3}>
         {error ? (
           <h1>error occuredd</h1>
         ) : pets ? (

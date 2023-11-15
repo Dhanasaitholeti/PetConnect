@@ -42,7 +42,7 @@ const FavouriteScreen = () => {
 
   return (
     <Box maxW={"80%"} mx={"auto"}>
-      <SimpleGrid columns={[2, null, 3]} gap={10}>
+      <SimpleGrid columns={[2, 3, 4]} gap={3}>
         {Err ? (
           <Heading>error occuredd</Heading>
         ) : pets ? (

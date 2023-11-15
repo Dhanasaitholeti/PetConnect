@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import { newMsgs } from "../../services/redux/slices/chat.slice";
 import { emitMessage } from "../../services/websocket";
 
-const InputMsg = () => {
+const MessageInputBar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const currentuser = useSelector((state: RootState) => state.UserReducer.user);
@@ -62,19 +62,17 @@ const InputMsg = () => {
   return (
     <InputGroup pos={"relative"} zIndex={10}>
       <Input
+        variant={"filled"}
         onChange={(e) => handleOnChange(e)}
         type="text"
         value={msg}
         placeholder="Type your message..."
         borderRadius="md"
-        bg="white"
         borderColor="gray.300"
-        _hover={{ borderColor: "gray.400" }}
-        _focus={{ borderColor: "teal.500", boxShadow: "outline" }}
       />
       <InputRightElement width="4.5rem" onClick={handleSendMsg} pos={"inherit"}>
         <IconButton
-          colorScheme="teal"
+          colorScheme="blue"
           aria-label="Send message"
           icon={<FaPaperPlane />}
         />
@@ -83,4 +81,4 @@ const InputMsg = () => {
   );
 };
 
-export default InputMsg;
+export default MessageInputBar;

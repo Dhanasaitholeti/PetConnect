@@ -10,7 +10,11 @@ const PetCard: React.FC<petCardProps> = ({ Pet }) => {
   return (
     <>
       <Link to={`/pet/${Pet.id}`}>
-        <Card _hover={{ boxShadow: "xl" }} maxW={"450px"}>
+        <Card
+          _hover={{ boxShadow: "xl" }}
+          maxW={"350px"}
+          border={"1px solid #F5F5F5"}
+        >
           <Image
             loading="lazy"
             src={Pet.image_url}

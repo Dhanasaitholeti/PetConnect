@@ -40,7 +40,7 @@ const Navbar = () => {
         as={"nav"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        px={32}
+        px={{ sm: 4, xl: 32 }}
       >
         <Link to={"/"}>
           <Image src={logo} h={20} />
