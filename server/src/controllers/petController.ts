@@ -12,6 +12,21 @@ export const getPets = async (req: Request, res: Response) => {
   }
 };
 
+export const getPetById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const petData = await prisma.pet.findFirst({
+      where: {
+        id,
+      },
+    });
+    console.log(petData);
+    res.status(200).json({ petData });
+  } catch (error) {
+    res.status(500).json({ message: "unable to get Data" });
+  }
+};
+
 export const newPet = async (req: Request, res: Response) => {
   const { breed, category, description, imageUrl, price, userid } = req.body;
   try {

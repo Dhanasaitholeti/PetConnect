@@ -8,6 +8,7 @@ export const urls = {
   favourites: `${hostname}/user/favourites`,
   getuser: `${hostname}/user/getuser`,
   getPets: `${hostname}/pet/`,
+  getIndividualPet: `${hostname}/pet/`, //add id
   addPet: `${hostname}/pet/add`,
   updatePet: `${hostname}/pet/update`, //add id at last
   deletePet: `${hostname}/pet/rm`, //add id at last

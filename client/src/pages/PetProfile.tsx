@@ -1,5 +1,5 @@
 import { Image, Heading, Text, Button, Flex } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "../services/redux/store";
 import { useMutation } from "@tanstack/react-query";
@@ -7,6 +7,8 @@ import { urls } from "../configs/apis";
 import axios from "axios";
 import { EnquirePetType, commonCreationResponseData } from "../utils/types";
 import useCustomToast from "../hooks/useCustomToast";
+import { useEffect } from "react";
+import { addPets, updatePets } from "../services/redux/slices/pet.slice";
 
 interface enquirePetResponseType extends commonCreationResponseData {
   chatid: string;
@@ -14,13 +16,31 @@ interface enquirePetResponseType extends commonCreationResponseData {
 
 const PetDetails = () => {
   const showToast = useCustomToast();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const idFromUrl = location.pathname.split("/")[2];
+
+  const currentUser = useSelector((state: RootState) => state.UserReducer.user);
+
   const pet = useSelector((state: RootState) =>
     state.PetReducer.pets?.find((entry) => entry.id === idFromUrl)
   );
-  const currentUser = useSelector((state: RootState) => state.UserReducer.user);
+
+  useEffect(() => {
+    const fetchPetData = async () => {
+      try {
+        const petData = await axios.get(`${urls.getIndividualPet}${idFromUrl}`);
+        dispatch(addPets({ pet: petData.data.petData })); // Assuming the data is in the 'data' property
+      } catch (error) {
+        console.error("Error fetching pet data:", error);
+      }
+    };
+
+    if (!pet) {
+      fetchPetData();
+    }
+  }, [idFromUrl]);
 
   const { mutate: enquire } = useMutation({
     mutationFn: async (formData: EnquirePetType) => {
