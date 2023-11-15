@@ -8,6 +8,7 @@ import { PetType } from "../utils/types";
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
 import PetCard from "../components/pet/PetCard";
 import { RootState } from "../services/redux/store";
+import PetSkeleton from "../components/skeletons/PetSkeleton";
 
 const FavouriteScreen = () => {
   const { pets, error: Err } = useSelector(
@@ -48,7 +49,7 @@ const FavouriteScreen = () => {
         ) : pets ? (
           pets.map((entry: PetType) => <PetCard Pet={entry} key={entry.id} />)
         ) : (
-          <h1>Loading.....</h1>
+          <PetSkeleton />
         )}
       </SimpleGrid>
     </Box>

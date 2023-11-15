@@ -26,13 +26,15 @@ const MessageInputBar = () => {
       chatId && state.ChatReducer.chats && state.ChatReducer.chats[chatId!]
   );
 
+  console.log(chats);
+
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    if (chats && chats.length < 1) {
+    if (chats && chats.length === 0) {
       setMsg("I am interested in buying this pet,let's discuss further");
     }
-  }, []);
+  }, [chatId]);
 
   const createMsgObj = () => {
     return {

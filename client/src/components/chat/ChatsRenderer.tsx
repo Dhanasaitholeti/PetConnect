@@ -26,12 +26,12 @@ const ChatsRenderer = () => {
   }, [chats]);
 
   if (!chats) {
-    return <p>welcome to chat screen</p>;
+    return <p>start a conversation....</p>;
   }
 
   return (
     <Flex flexDir={"column"}>
-      {chats?.length! > 0 ? (
+      {chats?.length! > 0 &&
         chats?.map((message: messageType) => (
           <Box
             key={message.id}
@@ -51,10 +51,7 @@ const ChatsRenderer = () => {
           >
             {message.content}
           </Box>
-        ))
-      ) : (
-        <p>start a conversation....</p>
-      )}
+        ))}
       <div ref={endRef}></div>
     </Flex>
   );

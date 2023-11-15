@@ -8,6 +8,7 @@ import { updatePets } from "../../services/redux/slices/pet.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../services/redux/store";
 import { useLocation } from "react-router-dom";
+import PetSkeleton from "../skeletons/PetSkeleton";
 
 const MainSection = () => {
   const location = useLocation();
@@ -65,7 +66,7 @@ const MainSection = () => {
             <PetCard Pet={entry} key={entry.id} />
           ))
         ) : (
-          <h1>Loading.....</h1>
+          <PetSkeleton />
         )}
       </SimpleGrid>
     </>
