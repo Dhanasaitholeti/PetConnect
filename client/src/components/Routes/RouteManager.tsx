@@ -13,15 +13,15 @@ const RouteManager = () => {
   return (
     <>
       <Routes>
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/user/login" element={<LoginScreen />} />
+        <Route path="/user/signup" element={<SignupScreen />} />
+        <Route path="*" element={<NotFoundScreen />} />
         <Route element={<RouteGaurd />}>
-          <Route path="/" element={<HomeScreen />} />
-          <Route path="/user/login" element={<LoginScreen />} />
-          <Route path="/user/signup" element={<SignupScreen />} />
           <Route path="/favourite" element={<FavouriteScreen />} />
           <Route path="/pet/:id" element={<PetDetails />} />
           <Route path="/pet/add" element={<AddPet />} />
           <Route path="/chats" element={<ChatScreen />} />
-          <Route path="*" element={<NotFoundScreen />} />
         </Route>
       </Routes>
     </>
