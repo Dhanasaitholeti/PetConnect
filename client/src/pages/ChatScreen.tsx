@@ -27,7 +27,7 @@ const ChatScreen = () => {
         <GridItem>
           <ChatsSidebar />
         </GridItem>
-        <GridItem p={4} colSpan={4}>
+        <GridItem p={4} colSpan={4} overflowY={"hidden"}>
           <ChatsSection />
         </GridItem>
       </Grid>

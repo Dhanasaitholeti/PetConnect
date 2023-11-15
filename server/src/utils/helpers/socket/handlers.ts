@@ -15,10 +15,7 @@ export async function sendDatatoConncetion(
 
     const ChatpartnerData = await getChatPartner(chatId, senderId);
     if (ChatpartnerData.members[0].connectionId)
-      io.to(ChatpartnerData.members[0].connectionId).emit(
-        "receive_messages",
-        newmsg
-      );
+      io.to(ChatpartnerData.members[0].connectionId).emit("newmessage", newmsg);
   } catch (err) {
     console.log(err);
   }

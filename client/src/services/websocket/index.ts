@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { Socket, io } from "socket.io-client";
 import { socketUrls } from "../../configs/apis";
 import { chatsusers, individualChat } from "../../utils/types/chatSlice.types";
-import { initialMsgs } from "../redux/slices/chat.slice";
+import { initialMsgs, newMsgs } from "../redux/slices/chat.slice";
 import { store } from "../redux/store";
 
 let socket: Socket | null = null;
@@ -46,6 +46,13 @@ const InitializeSocket = () => {
       socket?.removeAllListeners();
       socket = null;
     });
+
+    socket.on(socketUrls.channels.newMsg, (data) => {
+      console.log(data);
+      dispatch(newMsgs({ message: data }));
+    });
+
+    // socket.on("")
 
     socket.on("message", (message: any) => {
       //testing purpose

@@ -1,10 +1,10 @@
-import { Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import InputMsg from "./InputMsg";
 import ChatsRenderer from "./ChatsRenderer";
 
 const ChatsSection = () => {
   return (
-    <Grid templateRows={"repeat(16,1fr)"} height="100%">
+    <Grid templateRows={"repeat(16,1fr)"} height="100%" maxW={"inherit"}>
       <GridItem rowSpan={15} overflowY={"scroll"}>
         <ChatsRenderer />
       </GridItem>
