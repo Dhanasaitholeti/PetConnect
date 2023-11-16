@@ -1,4 +1,4 @@
-import { authmiddleware } from "middlewares/authMiddleware";
+import { authmiddleware } from "../middlewares/authMiddleware";
 import {
   getPets,
   newPet,
