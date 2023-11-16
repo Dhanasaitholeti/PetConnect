@@ -13,9 +13,9 @@ const router = Router();
 
 router.post("/login", userLogin);
 router.post("/signup", userSignup);
-router.get("/getusers", getAllUsers);
-router.post("/createchat", createChat);
-router.post("/starit", starPet);
+// router.get("/getusers", getAllUsers);
+router.post("/createchat", authmiddleware, createChat);
+router.post("/starit", authmiddleware, starPet);
 router.get("/getuser", authmiddleware, getUserByToken);
 router.get("/favourites", authmiddleware, getFavourites);
 

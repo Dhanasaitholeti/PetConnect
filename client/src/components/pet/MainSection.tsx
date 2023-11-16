@@ -1,14 +1,16 @@
-import { SimpleGrid } from "@chakra-ui/react";
-import PetCard from "./PetCard";
-import { useQuery } from "@tanstack/react-query";
+import { Flex, SimpleGrid } from "@chakra-ui/react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useDispatch, useSelector } from "react-redux";
+
+import PetCard from "./PetCard";
 import { urls } from "../../configs/apis";
 import { PetType } from "../../utils/types";
 import { updatePets } from "../../services/redux/slices/pet.slice";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../services/redux/store";
-import { useLocation } from "react-router-dom";
 import PetSkeleton from "../skeletons/PetSkeleton";
+import ErrorComponent from "../shared/Error";
 
 const MainSection = () => {
   const location = useLocation();
@@ -58,17 +60,21 @@ const MainSection = () => {
 
   return (
     <>
-      <SimpleGrid columns={[2, null, 3, 3, 4]} gap={3}>
-        {error ? (
-          <h1>error occuredd</h1>
-        ) : pets ? (
-          filteredPets?.map((entry: PetType) => (
-            <PetCard Pet={entry} key={entry.id} />
-          ))
-        ) : (
-          <PetSkeleton />
-        )}
-      </SimpleGrid>
+      {error ? (
+        <Flex alignItems={"center"} justifyContent={"center"}>
+          <ErrorComponent errorMessage="Unable to fetch,Try to refresh" />
+        </Flex>
+      ) : (
+        <SimpleGrid columns={[2, null, 3, 3, 4]} gap={3}>
+          {pets ? (
+            filteredPets?.map((entry: PetType) => (
+              <PetCard Pet={entry} key={entry.id} />
+            ))
+          ) : (
+            <PetSkeleton />
+          )}
+        </SimpleGrid>
+      )}
     </>
   );
 };

@@ -10,6 +10,7 @@ import useCustomToast from "../hooks/useCustomToast";
 import { useEffect } from "react";
 import { addPets, updatePets } from "../services/redux/slices/pet.slice";
 import PetDetailsSkeleton from "../components/skeletons/PetProfileSkeleton";
+import ErrorComponent from "../components/shared/Error";
 
 interface enquirePetResponseType extends commonCreationResponseData {
   chatid: string;
@@ -120,7 +121,9 @@ const PetDetails = () => {
         mb={8}
       >
         {error ? (
-          <p>error occured</p>
+          <Flex alignItems={"center"} justifyContent={"center"}>
+            <ErrorComponent errorMessage="Unable to fetch,Try to refresh" />
+          </Flex>
         ) : pet ? (
           <>
             <Image
