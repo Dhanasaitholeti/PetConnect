@@ -9,6 +9,7 @@ import { EnquirePetType, commonCreationResponseData } from "../utils/types";
 import useCustomToast from "../hooks/useCustomToast";
 import { useEffect } from "react";
 import { addPets, updatePets } from "../services/redux/slices/pet.slice";
+import PetDetailsSkeleton from "../components/skeletons/PetProfileSkeleton";
 
 interface enquirePetResponseType extends commonCreationResponseData {
   chatid: string;
@@ -26,6 +27,7 @@ const PetDetails = () => {
   const pet = useSelector((state: RootState) =>
     state.PetReducer.pets?.find((entry) => entry.id === idFromUrl)
   );
+  const error = useSelector((state: RootState) => state.PetReducer.error);
 
   useEffect(() => {
     const fetchPetData = async () => {
@@ -33,6 +35,7 @@ const PetDetails = () => {
         const petData = await axios.get(`${urls.getIndividualPet}${idFromUrl}`);
         dispatch(addPets({ pet: petData.data.petData })); // Assuming the data is in the 'data' property
       } catch (error) {
+        dispatch(updatePets({ pets: null, error: true }));
         console.error("Error fetching pet data:", error);
       }
     };
@@ -116,48 +119,55 @@ const PetDetails = () => {
         flexDirection={{ base: "column", md: "row" }}
         mb={8}
       >
-        <Image
-          src={pet?.image_url}
-          fallbackSrc={
-            "https://placehold.jp/3d4070/ffffff/150x150.png?text=No-Image"
-          }
-          alt={pet?.breed}
-          boxSize={{ base: "100%", md: "400px" }}
-          objectFit="cover"
-          borderRadius="md"
-          mr={{ base: 0, md: 4 }}
-          mb={{ base: 4, md: 0 }}
-        />
-
-        <Flex flexDir={"column"} pt={5} gap={2}>
-          <Heading as="h2" size="lg" mb={2}>
-            {pet?.breed}
-          </Heading>
-          <Text fontSize="lg" fontWeight={"semibold"} mb={2}>
-            {pet?.description}
-          </Text>
-          <Text>
-            <strong>Category:</strong> {pet?.category}
-          </Text>
-          <Text>
-            <strong>Price:</strong> ${pet?.price}
-          </Text>
-          <Text>
-            <strong>Seller ID:</strong> {pet?.userid}
-          </Text>
-          <Flex alignItems={"center"} gap={5}>
-            <Button colorScheme="pink" mt={4} onClick={handleStarIt}>
-              Favourite
-            </Button>
-            <Button
-              onClick={() => handleEnquire(pet!.userid, currentUser!.id)}
-              colorScheme="teal"
-              mt={4}
-            >
-              Enquire
-            </Button>
-          </Flex>
-        </Flex>
+        {error ? (
+          <p>error occured</p>
+        ) : pet ? (
+          <>
+            <Image
+              src={pet?.image_url}
+              fallbackSrc={
+                "https://placehold.jp/3d4070/ffffff/150x150.png?text=No-Image"
+              }
+              alt={pet?.breed}
+              boxSize={{ base: "100%", md: "400px" }}
+              objectFit="cover"
+              borderRadius="md"
+              mr={{ base: 0, md: 4 }}
+              mb={{ base: 4, md: 0 }}
+            />
+            <Flex flexDir={"column"} pt={5} gap={2}>
+              <Heading as="h2" size="lg" mb={2}>
+                {pet?.breed}
+              </Heading>
+              <Text fontSize="lg" fontWeight={"semibold"} mb={2}>
+                {pet?.description}
+              </Text>
+              <Text>
+                <strong>Category:</strong> {pet?.category}
+              </Text>
+              <Text>
+                <strong>Price:</strong> ${pet?.price}
+              </Text>
+              <Text>
+                <strong>Seller ID:</strong> {pet?.userid}
+              </Text>
+              <Flex alignItems={"center"} gap={5}>
+                <Button colorScheme="pink" mt={4} onClick={handleStarIt}>
+                  Favourite
+                </Button>
+                <Button
+                  onClick={() => handleEnquire(pet!.userid, currentUser!.id)}
+                  colorScheme="teal"
+                  mt={4}
+                >
+                  Enquire
+                </Button>
+              </Flex>
+            </Flex>
+          </>
+        ) : (
+          <PetDetailsSkeleton />
+        )}
       </Flex>
     </>
   );
