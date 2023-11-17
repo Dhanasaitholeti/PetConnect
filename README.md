@@ -11,9 +11,9 @@ This is a full-stack application with a monorepo structure. It consists of a Rea
 
 ### Clone the repository:
 
- ```bash
-git clone https://github.com/Dhanasaitholeti/PetConnect.git
- ```
+```bash
+ git clone https://github.com/Dhanasaitholeti/PetConnect.git
+```
 
 ### Manual Installation
 

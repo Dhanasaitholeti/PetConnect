@@ -1,27 +1,46 @@
-# React + TypeScript + Vite
+# PetConnect Server
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend (client) component of a full-stack application with a monorepo structure. It is built using Reactjs for UI components, Redux for state management and chakra-ui for styling.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The frontend project follows a modular structure to organize different components and features. Here is an overview of the project structure:
 
-## Expanding the ESLint configuration
+- `public`: publicly available assets like logo.
+- `src`: Contains the source code of the server.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  - `main.tsx`: Entry point of the client app.
+  - `app.tsx`: renders the whole app.
+  - `layout.tsx`: contains the Root layout for the Application.
+  - `assets`: contains static assets like images,fonts..
+  - `components`: contains reusable components
+    - `shared`: contains shares components all accross the app.
+    - `chat`: contains all the reusable components to render chat screen.
+    - `pet`: contains all the reusable components to render pet screen.
+    - `Routes`: contains manager for routes and route gaurd to implement client side authentication.
+    - `skeletons`: contains loading screens.
+  - `configs`: contains configuration files for apis.
+  - `hooks`: contains hooks which used frequently.
+  - `pages`: contains pages or screens of the app.
+  - `services`: contains application services like state management etc..
+    - `redux`: contains store and slices for managing state.
+    - `websocket`: contains implementation logic for websocket connections.
+  - `utils`: contains utility functions
+    - `helpers`: contains helper functions.
+    - `types`: contains all the types.
 
-- Configure the top-level `parserOptions` property like this:
+## Tools and Technologies Used
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- **Typescript:** A statically typed superset of JavaScript, bringing enhanced type-checking and tooling support to the PetConnect project.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **React js:** A JavaScript library to build reusable ui components.
+
+- **Redux:** A flexible and global state management tool.
+
+- **React-router-dom:** A javascript library to implement client side navigation.
+
+- **chakra-ui** A javascript Ui component library and css-in-js solution.
+
+- **Socket.io-client:** Used Socket.io-client to establish real time communication.
+
+- **Docker:** (optional) Containerization for easy deployment.
