@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, redirect, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { RootState } from "../../services/redux/store";
 import axios from "axios";
 import { urls } from "../../configs/apis";
