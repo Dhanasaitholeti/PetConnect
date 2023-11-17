@@ -1,4 +1,5 @@
-const hostname = "http://localhost:8000";
+const hostname = import.meta.env.VITE_SERVER_HOST;
+console.log(hostname);
 
 export const urls = {
   login: `${hostname}/user/login`, //

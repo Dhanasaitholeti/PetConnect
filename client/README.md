@@ -44,3 +44,4 @@ The frontend project follows a modular structure to organize different component
 - **Socket.io-client:** Used Socket.io-client to establish real time communication.
 
 - **Docker:** (optional) Containerization for easy deployment.
+

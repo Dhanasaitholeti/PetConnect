@@ -9,12 +9,3 @@ services:
     build:
       context: ./server
 
-  database:
-    image: postgresql:latest
-    container_name: petconnect
-    environment:
-      POSTGRES_DB: test
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-    volumes:
-      - ./database_data:/var/lib/postgresql/data

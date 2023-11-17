@@ -10,7 +10,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <Flex flexDir={"column"}>
         <Navbar />
-        <Box as="main" mt={10}>
+        <Box as="main" mt={{ base: 0, xl: 10 }}>
           {children}
         </Box>
       </Flex>
