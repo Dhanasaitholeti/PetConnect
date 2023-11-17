@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { addPets, updatePets } from "../services/redux/slices/pet.slice";
 import PetDetailsSkeleton from "../components/skeletons/PetProfileSkeleton";
 import ErrorComponent from "../components/shared/Error";
+import Cookies from "js-cookie";
 
 interface enquirePetResponseType extends commonCreationResponseData {
   chatid: string;
@@ -22,6 +23,7 @@ const PetDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const idFromUrl = location.pathname.split("/")[2];
+  const cookie = Cookies.get("authToken");
 
   const currentUser = useSelector((state: RootState) => state.UserReducer.user);
 
@@ -49,7 +51,11 @@ const PetDetails = () => {
   const { mutate: enquire } = useMutation({
     mutationFn: async (formData: EnquirePetType) => {
       try {
-        const response = await axios.post(urls.Enquire, formData);
+        const response = await axios.post(urls.Enquire, formData, {
+          headers: {
+            Authorization: `Bearer ${cookie}`,
+          },
+        });
         return response.data as enquirePetResponseType;
       } catch (error) {
         console.error("Login error:", error);
@@ -61,7 +67,11 @@ const PetDetails = () => {
   const { mutate: starit } = useMutation({
     mutationFn: async (data: { userId: string; petId: string }) => {
       try {
-        const response = await axios.post(urls.starpet, data);
+        const response = await axios.post(urls.starpet, data, {
+          headers: {
+            Authorization: `Bearer ${cookie}`,
+          },
+        });
         return response.data as commonCreationResponseData;
       } catch (error) {
         console.error("Login error:", error);
@@ -89,7 +99,9 @@ const PetDetails = () => {
             },
           });
         },
-        onError: () => {
+        onError: (error) => {
+          console.log(error);
+
           showToast({
             status: "error",
             title: "Enquiry creation failed",
