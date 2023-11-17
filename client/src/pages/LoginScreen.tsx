@@ -58,7 +58,7 @@ const LoginScreen = () => {
       onError: (error) => {
         showToast({
           status: "error",
-          title: "Error occured",
+          title: "Invalid Credentials",
           description: `${error.message} error has occured, Try Again`,
         });
         disptach(updateuser({ user: null, error: true }));

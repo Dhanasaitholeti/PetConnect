@@ -286,7 +286,7 @@ export const petsData = [
     description:
       "The hedgehog is a spiky but adorable companion. With their nocturnal habits and ability to curl into a ball for defense, they are sure to intrigue pet lovers.",
     img_url:
-      " ",
+      "https://cdn.pixabay.com/photo/2016/02/22/10/06/hedgehog-1215140_640.jpg",
     price: 60,
   },
   {

@@ -1,5 +1,4 @@
 const hostname = import.meta.env.VITE_SERVER_HOST;
-console.log(hostname);
 
 export const urls = {
   login: `${hostname}/user/login`, //
@@ -16,7 +15,7 @@ export const urls = {
 };
 
 export const socketUrls = {
-  connectionUrl: "http://localhost:8000/",
+  connectionUrl: hostname,
   channels: {
     newMsg: "newmessage",
     initData: "initialData",
