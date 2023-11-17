@@ -2,6 +2,14 @@
 
 This is a full-stack application with a monorepo structure. It consists of a ReactJS frontend using Redux for state management and a Node.js backend with Express.
 
+
+![image](https://github.com/Dhanasaitholeti/PetConnect/assets/86939592/632023bc-d292-4d3f-ab5c-c6e0d2572e02)
+
+#### Test Credentials:
+  - username:buyer@gmail.com
+  - password: 123456
+
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) installed
