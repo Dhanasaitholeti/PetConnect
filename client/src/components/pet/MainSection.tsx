@@ -65,7 +65,7 @@ const MainSection = () => {
           <ErrorComponent errorMessage="Unable to fetch,Try to refresh" />
         </Flex>
       ) : (
-        <SimpleGrid columns={[2, null, 3, 3, 4]} gap={3}>
+        <SimpleGrid columns={[2, null, 3, 3, 4]} gap={{ base: 1, md: 3 }}>
           {pets ? (
             filteredPets?.map((entry: PetType) => (
               <PetCard Pet={entry} key={entry.id} />

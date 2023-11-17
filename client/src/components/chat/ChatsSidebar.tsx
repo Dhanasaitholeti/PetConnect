@@ -1,14 +1,13 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../services/redux/store";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ChatsSidebar = () => {
   const chatslist = useSelector((state: RootState) => state.ChatReducer.list);
-  const location = useLocation();
 
   return (
-    <Box py={4} height="100%">
+    <Box py={4} height="100%" bgColor={"#F5F5F5"}>
       <Heading mb={4} fontSize="xl">
         Your Chats:
       </Heading>
@@ -20,7 +19,7 @@ const ChatsSidebar = () => {
             borderY={"1px solid #C0C0C0"}
             _hover={{ backgroundColor: "#C0C0C0" }}
           >
-            <Text fontWeight="bold" fontSize={"lg"}>
+            <Text fontWeight="bold" fontSize={"xl"}>
               {entry.partner}
             </Text>
           </Box>

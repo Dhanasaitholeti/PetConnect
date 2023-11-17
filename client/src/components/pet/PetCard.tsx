@@ -20,14 +20,14 @@ const PetCard: React.FC<petCardProps> = ({ Pet }) => {
             src={Pet.image_url}
             fallbackSrc="https://placehold.jp/3d4070/ffffff/150x150.png?text=No-Image"
             alt={Pet.breed}
-            height="200px"
+            height={{ base: "100px", md: "200px" }}
             objectFit="cover"
             borderTopRadius={"inherit"}
           />
           <CardBody>
             <Flex justify="space-between" align="center">
               <Box>
-                <Text fontWeight="bold" fontSize="lg">
+                <Text fontWeight="bold" fontSize={{ base: "sm", lg: "lg" }}>
                   {Pet.breed}
                 </Text>
                 <Text color="red.500">{`$${Pet.price}`}</Text>

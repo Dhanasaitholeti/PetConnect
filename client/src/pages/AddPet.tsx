@@ -10,6 +10,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useReducer } from "react";
+import Cookies from "js-cookie";
 import {
   addPetState as State,
   addPetAction as Action,
@@ -58,7 +59,11 @@ const AddPet = () => {
 
   const { isPending, mutate } = useMutation({
     mutationFn: async (formData: newPetForm) => {
-      const response = await axios.post(urls.addPet, formData);
+      const response = await axios.post(urls.addPet, formData, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get("authToken")}`,
+        },
+      });
       return response.data as commonCreationResponseData;
     },
   });
@@ -88,6 +93,7 @@ const AddPet = () => {
           dispatch({ type: "RESET_FORM" });
         },
         onError: (error: Error) => {
+          console.log(error);
           showToast({
             status: "error",
             title: "Error occured",

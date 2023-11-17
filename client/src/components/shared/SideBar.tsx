@@ -23,13 +23,8 @@ const SideBar = () => {
   }, [filter]);
 
   return (
-    <Flex
-      flexDir={{ sm: "row", xl: "column" }}
-      gap={10}
-      p={4}
-      pos={{ sm: "inherit", xl: "fixed" }}
-    >
-      <Flex flexDir={"column"}>
+    <Flex flexDir="column" p={4} pos={{ base: "inherit", xl: "fixed" }}>
+      <Flex flexDir="column" mb={4}>
         <Heading size="md" mb={2}>
           Filter by Category:
         </Heading>
@@ -37,7 +32,7 @@ const SideBar = () => {
           {categories.map((category) => (
             <ListItem
               onClick={() => setFilter((prev) => ({ ...prev, category }))}
-              fontWeight={"semibold"}
+              fontWeight="semibold"
               key={category}
               _hover={{ cursor: "pointer", color: "blue.500" }}
             >
@@ -47,7 +42,7 @@ const SideBar = () => {
         </List>
       </Flex>
 
-      <Flex flexDir={"column"}>
+      <Flex flexDir="column" mb={4}>
         <Heading size="md" mb={2}>
           Filter by Price:
         </Heading>
@@ -55,7 +50,7 @@ const SideBar = () => {
           {prices.map((price) => (
             <ListItem
               onClick={() => setFilter((prev) => ({ ...prev, price }))}
-              fontWeight={"semibold"}
+              fontWeight="semibold"
               key={price}
               _hover={{ cursor: "pointer", color: "blue.500" }}
             >
@@ -75,10 +70,11 @@ const SideBar = () => {
         }
         colorScheme="blue"
       >
-        clear filters
+        Clear Filters
       </Button>
     </Flex>
   );
 };
 
 export default SideBar;
+

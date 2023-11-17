@@ -18,20 +18,22 @@ const ChatScreen = () => {
   return (
     <>
       <Grid
-        maxW={"80%"}
+        maxW={{ base: "95%", "2xl": "90%" }}
         mx={"auto"}
         height="80vh"
-        templateColumns={"repeat(5,1fr)"}
+        templateColumns={{ base: "1fr", md: "repeat(10,1fr)" }}
         shadow={"md"}
       >
-        <GridItem>
+        <GridItem colSpan={{ md: 3, lg: 2 }}>
           <ChatsSidebar />
         </GridItem>
-        <GridItem p={4} colSpan={4} overflowY={"hidden"}>
-          {
-
-            <ChatsSection />
-          }
+        <GridItem
+          p={4}
+          colSpan={{ md: 7, lg: 8 }}
+          display={{ base: "none", md: "block" }}
+          overflowY={"hidden"}
+        >
+          <ChatsSection />
         </GridItem>
       </Grid>
     </>
