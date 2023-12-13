@@ -27,7 +27,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=8000
-      - JWT_KEY="ThisisVeryRandomlyGeneratedKeyForAJsonWebTokenIthinkItIsGoingtoBeComplex"
+      - JWT_KEY="enter_your_random_key_here"
       - DATABASE_URL="postgresql://database:randompassword@localhost:5432/test"
 
   database:
